@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{6CAA14E9-1539-4581-A862-017B29A8979B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nestel.TO", "Nestel.TO\Nestel.TO.csproj", "{AF1B03DC-F791-4DCA-80BD-F3C3717B0E0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{BA0CD05C-61F4-46A4-B16C-B87ACA15BBBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CAA14E9-1539-4581-A862-017B29A8979B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CAA14E9-1539-4581-A862-017B29A8979B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CAA14E9-1539-4581-A862-017B29A8979B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CAA14E9-1539-4581-A862-017B29A8979B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF1B03DC-F791-4DCA-80BD-F3C3717B0E0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF1B03DC-F791-4DCA-80BD-F3C3717B0E0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF1B03DC-F791-4DCA-80BD-F3C3717B0E0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF1B03DC-F791-4DCA-80BD-F3C3717B0E0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA0CD05C-61F4-46A4-B16C-B87ACA15BBBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0CD05C-61F4-46A4-B16C-B87ACA15BBBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0CD05C-61F4-46A4-B16C-B87ACA15BBBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0CD05C-61F4-46A4-B16C-B87ACA15BBBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F1A5BE1-360C-4B40-A33A-E401437C3957}
+	EndGlobalSection
+EndGlobal

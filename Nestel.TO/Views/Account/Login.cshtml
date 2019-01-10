@@ -1,0 +1,32 @@
+﻿@model Nestel.TO.ViewModels.LoginViewModel
+
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Вход в приложение</h2>
+
+<form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
+    <div asp-validation-summary="ModelOnly" class="wrong-string" ></div>
+    <div>
+        <label asp-for="Username" /> <br />
+        <input asp-for="Username" />
+        <span asp-validation-for="Username" />
+    </div>
+    <div>
+        <label asp-for="Password" /> <br />
+        <input asp-for="Password" />
+        <span asp-validation-for="Password" />
+    </div>
+    <div>
+        <label asp-for="RememberMe" /> <br />
+        <input asp-for="RememberMe" />
+    </div>
+    <div>
+        <input type="submit" value="Войти"/>
+    </div>
+</form>
+
+
+
