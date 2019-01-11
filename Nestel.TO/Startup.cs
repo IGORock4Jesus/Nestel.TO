@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 
 namespace Nestel.TO
 {
@@ -36,7 +37,20 @@ namespace Nestel.TO
 			services.AddDbContext<Models.Context>(optionsAction => optionsAction.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 			services.AddIdentity<Models.User, Models.Role>()
-				.AddEntityFrameworkStores<Models.Context>();
+				.AddEntityFrameworkStores<Models.Context>()
+				.AddDefaultTokenProviders()
+				.AddRoleManager<RoleManager<Models.Role>>();
+
+			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+				.AddCookie(options =>
+				{
+					options.CookieHttpOnly = true;
+					options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+					options.LoginPath = new PathString("/Account/Login");
+					options.LogoutPath = new PathString("/Account/Logout");
+					options.AccessDeniedPath = options.LoginPath;
+				});
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}
@@ -58,11 +72,13 @@ namespace Nestel.TO
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
 
+			app.UseAuthentication();
+
 			app.UseMvc(routes =>
 			{
 				routes.MapRoute(
 					name: "default",
-					template: "{controller=Account}/{action=Index}/{id?}");
+					template: "{controller=Home}/{action=Index}/{id?}");
 			});
 		}
 	}

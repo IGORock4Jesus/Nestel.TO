@@ -9,6 +9,7 @@ using Nestel.TO.Models;
 
 namespace Nestel.TO.Controllers
 {
+	[Authorize(Roles = "admin")]
 	public class HomeController : Controller
 	{
 		private readonly Context context;
@@ -18,12 +19,12 @@ namespace Nestel.TO.Controllers
 			this.context = context;
 		}
 
+		[AllowAnonymous]
 		public IActionResult Index()
 		{
 			return View();
 		}
 
-		[Authorize(Roles = "ADMIN")]
 		public IActionResult About()
 		{
 			ViewData["Message"] = "Your application description page.";
@@ -31,6 +32,7 @@ namespace Nestel.TO.Controllers
 			return View();
 		}
 
+		[AllowAnonymous]
 		public IActionResult Contact()
 		{
 			ViewData["Message"] = "Your contact page.";
@@ -43,6 +45,7 @@ namespace Nestel.TO.Controllers
 			return View();
 		}
 
+		[AllowAnonymous]
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
