@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,14 @@ namespace Nestel.TO.Controllers
 
 		public AccountController(SignInManager<Models.User> signInManager)
 		{
+			ViewBag.IsLogged = false;
 			this.signInManager = signInManager;
+		}
+
+		[HttpGet]
+		public IActionResult AccessDenied(string ReturnUrl = null)
+		{
+			return View(new ViewModels.Account.AccessDeniedViewModel { ReturnUrl = ReturnUrl });
 		}
 
 		[HttpGet]
@@ -25,14 +33,16 @@ namespace Nestel.TO.Controllers
 			return View();
 		}
 
+		[AllowAnonymous]
 		[HttpGet]
 		public IActionResult Login(string returnUrl = null)
 		{
 			return View(new ViewModels.LoginViewModel { ReturnUrl = returnUrl });
 		}
 
+		[AllowAnonymous]
 		[HttpPost]
-		[ValidateAntiForgeryToken]
+		//[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Login(ViewModels.LoginViewModel login)
 		{
 			if (ModelState.IsValid)
@@ -59,22 +69,7 @@ namespace Nestel.TO.Controllers
 
 			return View(login);
 		}
-		//private async Task Authenticate(Models.User user)
-		//{
-		//	// создаем один claim
-		//	var claims = new List<Claim>
-		//	{
-		//		new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-		//		new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.Name)
-		//	};
-		//	// создаем объект ClaimsIdentity
-		//	ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
-		//		ClaimsIdentity.DefaultRoleClaimType);
-		//	// установка аутентификационных куки
-		//	await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-		//}
-		[HttpPost]
-		[ValidateAntiForgeryToken]
+
 		public async Task<IActionResult> Logout()
 		{
 			await signInManager.SignOutAsync();

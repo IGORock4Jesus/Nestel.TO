@@ -14,7 +14,7 @@ namespace Nestel.TO
 {
 	public class Program
 	{
-		public static async Task Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var host = CreateWebHostBuilder(args).Build();
 
@@ -26,7 +26,7 @@ namespace Nestel.TO
 					var userManager = services.GetRequiredService<UserManager<Models.User>>();
 					var roleManager = services.GetRequiredService<RoleManager<Models.Role>>();
 					//var context = services.GetRequiredService<Models.Context>();
-					await Models.Initializer.Initialize(userManager, roleManager);
+					Models.Initializer.Initialize(userManager, roleManager).Wait();
 				}
 				catch (Exception ex)
 				{

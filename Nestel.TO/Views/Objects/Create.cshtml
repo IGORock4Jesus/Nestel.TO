@@ -1,0 +1,30 @@
+﻿@model Nestel.TO.ViewModels.CreateObjectViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Добавление нового объекта.</h2>
+
+@if (Model.IsShowSuccess)
+{
+    <label>Объект @Model.Name успешно создан.</label>
+}
+
+<form asp-action="Create" asp-controller="Objects">
+    <div asp-validation-summary="ModelOnly" class="wrong-string"></div>
+    <div>
+        <label asp-for="Name"></label><br />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" />
+    </div>
+    <div>
+        <label asp-for="Address"></label><br />
+        <input asp-for="Address" />
+        <span asp-validation-for="Address" />
+    </div>
+    <div>
+        <input type="submit" value="Создать" class="btn btn-link" />
+    </div>
+</form>
+

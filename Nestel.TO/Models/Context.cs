@@ -6,6 +6,9 @@ using JetBrains.Annotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Nestel.TO.ViewModels;
+using Nestel.TO.ViewModels.Users;
+using Nestel.TO.ViewModels.Account;
 
 namespace Nestel.TO.Models
 {
@@ -15,6 +18,9 @@ namespace Nestel.TO.Models
 		{
 			Database.EnsureCreated();
 		}
+
+		public DbSet<Object> Objects { get; set; }
+
 
 	}
 }

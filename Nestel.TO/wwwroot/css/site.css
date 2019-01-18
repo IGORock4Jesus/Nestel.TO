@@ -35,3 +35,9 @@ body {
         display: none;
     }
 }
+
+/************************************/
+
+.navbar-nav > li > a > .clicable {
+	cursor: pointer;
+}

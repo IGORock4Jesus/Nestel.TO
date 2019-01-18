@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Nestel.TO.ViewModels.Account.IndexItemViewModel>
+
+<p>
+    <a href="#" onclick="show_create_user()">[+] Добавить нового</a>
+</p>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Roles)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Roles)
+                </td>
+                <td>
+                    <a href="#" onclick="show_edit_user(@item.Id)">Редактировать</a> |
+                    <a href="#" onclick="show_detail_user(@item.Id)">Подробно</a> |
+                    @if (item.CanRemove)
+                    {
+                        <a href="#" onclick="show_delete_user(@item.Id)">Удалить</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

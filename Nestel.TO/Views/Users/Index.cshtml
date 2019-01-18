@@ -1,28 +1,34 @@
-﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+﻿@model Nestel.TO.ViewModels.Account.IndexViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Список пользователей";
 }
 
-<h2>Index</h2>
+<h2>Список пользователей</h2>
 
-<table border="2" width="80%" cellspacing="7" cellpadding="7">
-	<thead>
-		<tr>
-			<th>Id</th>
-			<th>Username</th>
-			<th>Phone</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var user in Model)
-		{
-		<tr >
-			<td>@user.Id</td>
-			<td>@user.UserName</td>
-			<td>@user.PhoneNumber</td>
-		</tr>
-		}
-	</tbody>
-</table>
 
+<div class="row">
+    <div class="col-md-4">
+        <table class="table table-condensed table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th style="min-width:700px">Роли</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td style="text-wrap:none">@item.Roles</td>
+                        @if (Model.CanEdit)
+                        {
+                            <td><a asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id">Редатировать</a></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

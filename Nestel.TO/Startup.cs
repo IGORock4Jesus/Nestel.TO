@@ -36,7 +36,14 @@ namespace Nestel.TO
 
 			services.AddDbContext<Models.Context>(optionsAction => optionsAction.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-			services.AddIdentity<Models.User, Models.Role>()
+			services.AddIdentity<Models.User, Models.Role>(options =>
+			{
+				options.Password.RequireDigit = false;
+				options.Password.RequiredLength = 4;
+				options.Password.RequireNonAlphanumeric = false;
+				options.Password.RequireLowercase = false;
+				options.Password.RequireUppercase = false;
+			})
 				.AddEntityFrameworkStores<Models.Context>()
 				.AddDefaultTokenProviders()
 				.AddRoleManager<RoleManager<Models.Role>>();

@@ -1,0 +1,30 @@
+﻿@model Nestel.TO.ViewModels.Users.EditViewModel
+
+<h3>Вы уверены что хотите удалить пользователя @Model.Username?</h3>
+<div>
+    <h4>EditViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EMail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EMail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+    </dl>
+
+    <input type="button" value="Удалить" class="btn btn-default" onclick="delete_user(@Model.Id)" /> |
+    <a href="#" onclick="show_user_list()">Назад к списку</a>
+</div>

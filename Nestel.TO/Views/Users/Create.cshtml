@@ -1,0 +1,42 @@
+﻿@model Nestel.TO.ViewModels.Users.CreateUserViewModel
+
+<h4>Создание нового пользователя</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @if (Model.Errors.Items.Count != 0)
+        {
+            <div class="text-danger">Ошибки:</div>
+            <div>
+                @foreach (var item in Model.Errors.Items)
+                {
+                    <div class="text-danger">- @item</div>
+                }
+            </div>
+        }
+        <div class="form-group">
+            <label class="control-label">Логин</label>
+            <input type="text" id="username" class="form-control" value="@Model.Username" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Пароль</label>
+            <input type="password" id="password" class="form-control" value="@Model.Password" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">E-Mail</label>
+            <input type="text" id="email" class="form-control" value="@Model.EMail" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Телефон с Telegram</label>
+            <input type="text" id="phone" class="form-control" value="@Model.Phone" />
+        </div>
+        <div class="form-group">
+            <input type="button" value="Добавить" class="btn btn-default" onclick="create_user()" />
+        </div>
+    </div>
+</div>
+
+<div>
+    <a href="#" onclick="show_user_list()">Назад к списку</a>
+</div>
+

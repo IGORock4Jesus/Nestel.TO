@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,29 +11,61 @@ namespace Nestel.TO.Models
 	{
 		public static async Task Initialize(UserManager<User> userManager, RoleManager<Role> roleManager)
 		{
-			if(await roleManager.FindByNameAsync("admin") == null)
-			{
-				await roleManager.CreateAsync(new Role("admin"));
-			}
-			if(await roleManager.FindByNameAsync("user") == null)
-			{
-				await roleManager.CreateAsync(new Role("user"));
-			}
+			Debug.WriteLine("----------------------------->>>>>>>>>");
+			Debug.WriteLine("Database Initializing...");
+			Debug.WriteLine("<<<<<<<<<-----------------------------");
 
-			var admin = await userManager.FindByNameAsync("admin");
+			await AddRoleIfNotExist(roleManager, "Guest");
+			await AddRoleIfNotExist(roleManager, "AccountViewer");
+			await AddRoleIfNotExist(roleManager, "AccountEditor");
+			await AddRoleIfNotExist(roleManager, "ObjectViewer");
+			await AddRoleIfNotExist(roleManager, "ObjectEditor");
+			await AddRoleIfNotExist(roleManager, "ApplicationViewer");
+			await AddRoleIfNotExist(roleManager, "ApplicationEditor");
 
-			if(admin == null)
+			var result = await AddUserIfNotExist(userManager, "admin", "_Aa1234567", false);
+
+			if (result)
+			{
+				await AddRoleToUser(userManager, "admin", "Guest");
+				await AddRoleToUser(userManager, "admin", "AccountViewer");
+				await AddRoleToUser(userManager, "admin", "AccountEditor");
+				await AddRoleToUser(userManager, "admin", "ObjectViewer");
+				await AddRoleToUser(userManager, "admin", "ObjectEditor");
+				await AddRoleToUser(userManager, "admin", "ApplicationViewer");
+				await AddRoleToUser(userManager, "admin", "ApplicationEditor");
+			}
+		}
+
+		private static async Task AddRoleToUser(UserManager<User> userManager, string username, string rolename)
+		{
+			await userManager.AddToRoleAsync(await userManager.FindByNameAsync(username), rolename);
+		}
+
+		private static async Task<bool> AddUserIfNotExist(UserManager<User> userManager, string username, string password, bool removable)
+		{
+			var admin = await userManager.FindByNameAsync(username);
+
+			if (admin == null)
 			{
 				var result = await userManager.CreateAsync(admin = new User
 				{
-					UserName = "admin"
+					UserName = username,
+					Removable = removable
 				},
-				"_Aa1234567");
+				password);
 
-				if (result.Succeeded)
-				{
-					await userManager.AddToRoleAsync(admin, "admin");
-				}
+				return result.Succeeded;
+			}
+
+			return false;
+		}
+
+		private static async Task AddRoleIfNotExist(RoleManager<Role> roleManager, string name)
+		{
+			if (await roleManager.FindByNameAsync(name) == null)
+			{
+				await roleManager.CreateAsync(new Role(name));
 			}
 		}
 	}

@@ -8,5 +8,9 @@ namespace Nestel.TO.Models
 {
 	public class User : IdentityUser<long>
 	{
+		/// <summary>
+		/// Может ли быть удалено.
+		/// </summary>
+		public bool Removable { get; set; }
 	}
 }
